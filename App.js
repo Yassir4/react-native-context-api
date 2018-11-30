@@ -10,33 +10,38 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 
 export default class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      theme: themes.light
-    };
-
-    this.toggleTheme = () => {
-      this.setState(state => ({
-        theme: state.theme === themes.dark ? themes.light : themes.dark
-      }));
-    };
+  state = {
+    name: 'yassir',
+    age: 20,
+    cool: true
   }
 
-  render() {
-    return (
-      <View>
-        <ThemeContext.Provider value={this.state.theme}>
-          <ThemedButton changeTheme={this.toggleTheme} />
-        </ThemeContext.Provider>
-        <View>
-          <ThemedButton />
-        </View>
+  render(){
+    return(
+      <View style={styles.container}>
+        <Family name={this.state.name}/>
       </View>
-    );
+    )
   }
 }
 
+
+class Person extends Component {
+  render(){
+    return(
+      <View>
+        <Text>Hey I'm {this.props.name}</Text>
+      </View>
+    )
+  }
+}
+
+// the parenthesis let's us get ride of return  
+const Family = (props) => (
+  <View>
+    <Person name={props.name}/>
+  </View>
+)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
